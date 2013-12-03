@@ -1,6 +1,7 @@
 {
     "name" : "flint/brick",
     "description" : "Binds Symfony and Flint components together with Silex",
+    "license" : "MIT",
 
     "autoload" : {
         "psr-0" : { "Brick\\" : "src" }
