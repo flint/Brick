@@ -4,7 +4,7 @@ namespace Brick;
 
 use Brick\Provider\TackerServiceProvider;
 use Brick\Provider\RoutingServiceProvider;
-use Brick\provider\ExceptionServiceProvider;
+use Brick\Provider\ExceptionServiceProvider;
 
 class Application extends \Silex\Application
 {
