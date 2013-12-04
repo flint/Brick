@@ -15,6 +15,7 @@ use Tacker\Loader\PhpFileLoader;
 use Tacker\Loader\YamlFileLoader;
 use Tacker\Normalizer\ChainNormalizer;
 use Tacker\Normalizer\EnvironmentNormalizer;
+use Tacker\Normalizer\EnvfileNormalizer;
 use Tacker\Normalizer\PimpleNormalizer;
 use Tacker\ResourceCollection;
 
@@ -44,8 +45,9 @@ class TackerServiceProvider implements \Silex\Api\ServiceProviderInterface
 
         $app['tacker.normalizer'] = function ($app) {
             return new ChainNormalizer(array(
-                new EnvironmentNormalizer,
+                new EnvfileNormalizer($app['tacker.locator']),
                 new PimpleNormalizer($app),
+                new EnvironmentNormalizer,
             ));
         };
 
