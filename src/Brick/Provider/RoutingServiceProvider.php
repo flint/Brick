@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Loader\PhpFileLoader;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Routing\RouteCollection;
 
 class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
 {
