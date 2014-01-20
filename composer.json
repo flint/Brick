@@ -15,10 +15,11 @@
     },
 
     "require-dev" : {
-        "flint/tacker"    : "~1.0",
-        "silex/silex"     : "dev-2.0-experimental",
-        "twig/twig"       : "~1.14",
-        "phpspec/phpspec" : "~2.0"
+        "flint/tacker"         : "~1.0",
+        "silex/silex"          : "dev-2.0-experimental",
+        "twig/twig"            : "~1.14",
+        "phpspec/phpspec"      : "~2.0",
+        "doctrine/annotations" : "~1.0"
     },
 
     "extra" : {
