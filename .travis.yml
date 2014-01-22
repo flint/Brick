@@ -4,11 +4,15 @@ php:
     - 5.3
     - 5.4
     - 5.5
+    - hhvm
+
+matrix:
+    allow_failures:
+        - php: hhvm
 
 before_script:
-    - "echo '{\"config\":{\"github-oauth\": {\"github.com\":\"fa354b2f030836334eac842f8fd69a03e353d247\"}}}' > ~/.composer/config.json"
-    - "composer install --dev"
+    - "composer install"
 
 script:
-    - ./vendor/bin/phpspec -fpretty
+    - ./vendor/bin/phpspec run -fpretty
     - phpunit

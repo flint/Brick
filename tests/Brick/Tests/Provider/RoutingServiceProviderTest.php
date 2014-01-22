@@ -67,6 +67,7 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
             array('routing.xml', 'world from xml'),
             array('routing.php', 'world from php'),
             array('routing.yml', 'world from yml'),
+            array('routing_annotation.yml', 'world from file annotation'),
         );
     }
 }

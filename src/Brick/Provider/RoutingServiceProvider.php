@@ -5,6 +5,9 @@ namespace Brick\Provider;
 use Brick\ControllerResolver;
 use Brick\Routing\ChainMatcher;
 use Brick\Routing\NullLoader;
+use Brick\Routing\AnnotationClassLoader;
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\FileCacheReader;
 use Pimple;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -13,6 +16,8 @@ use Symfony\Component\Routing\Loader\ClosureLoader;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
+use Symfony\Component\Routing\Loader\AnnotationFileLoader;
+use Symfony\Component\Routing\Loader\AnnotationDirectoryLoader;
 use Symfony\Component\Routing\Router;
 
 class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
@@ -61,20 +66,38 @@ class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
             return new Router($app['routing.loader'], $resource, $config, $app['request_context'], $app['logger']);
         };
 
-        $app['routing.loader'] = function ($app) {
+
+        $app['routing.loader_resolver'] = function ($app) {
             $locator = $app['routing.locator'];
 
-            return new DelegatingLoader(new LoaderResolver(array(
+            $resolver = new LoaderResolver(array(
                 new PhpFileLoader($locator),
                 new XmlFileLoader($locator),
                 new YamlFileLoader($locator),
                 new NullLoader,
                 new ClosureLoader,
-            )));
+            ));
+
+            if (class_exists('Doctrine\Common\Annotations\AnnotationReader')) {
+                $loader = new AnnotationClassLoader($app['routing.annotation_reader']);
+
+                $resolver->addLoader(new AnnotationFileLoader($locator, $loader));
+                $resolver->addLoader(new AnnotationDirectoryLoader($locator, $loader));
+            }
+
+            return $resolver;
+        };
+
+        $app['routing.loader'] = function ($app) {
+            return new DelegatingLoader($app['routing.loader_resolver']);
         };
 
         $app['routing.locator'] = function ($app) {
             return new FileLocator($app['routing.config']['paths']);
+        };
+
+        $app['routing.annotation_reader'] = function ($app) {
+            return new AnnotationReader;
         };
     }
 }
