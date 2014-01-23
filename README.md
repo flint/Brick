@@ -22,3 +22,12 @@ Both can be run with
 $ ./vendor/bin/phpspec
 $ phpunit
 ```
+
+### Updating providers subsplit
+
+First install https://github.com/dflydev/git-subsplit. Then update the subsplit and publish it to the right
+repository.
+
+``` bash
+$ git subsplit publish src/Brick/Provider:git@github.com:flint/providers.git --heads=master --update
+```
