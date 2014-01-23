@@ -1,19 +1,17 @@
 {
     "name" : "flint/providers",
+    "description" : "Collection of Silex ServiceProviders",
     "license" : "MIT",
 
     "autoload" : {
-        "psr-0" : { "Brick\\Provider" : "" }
+        "psr-4" : { "Brick\\Provider\\" : "" }
     },
-
 
     "require" : {
         "php" : ">=5.3.3",
         "pimple/pimple" : "~1.0",
         "silex/api" : "*"
     },
-
-    "target-dir" : "Brick/Provider",
 
     "extra" : {
         "branch-alias" : {
