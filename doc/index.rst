@@ -170,6 +170,45 @@ It will look through theese types of templates and return the first found.
 
 This is the same lookup that is `done in Symfony <http://symfony.com/doc/current/cookbook/controller/error_pages.html>`_.
 
+.. note::
+
+    When developing theese error pages it can be useful to view them in the dev environment. With a controller
+    and a simple trick, this can easily be done.
+
+    .. code-block:: php
+
+        <?php
+
+        namespace My\Controller;
+
+        use Brick\Controller\ExceptionController;
+        use Symfony\Component\Debug\Exception\FlattenException;
+        use Symfony\Component\HttpFoundation\Request;
+
+        class ErrorPageController
+        {
+            public function __construct(ExceptionController $controller)
+            {
+                $this->controller = $controller;
+            }
+
+            public function __invoke(Request $request, $statusCode)
+            {
+                $exception = new FlattenException(new Exception(), $statusCode);
+
+                return $controller($request, $exception);
+            }
+        }
+
+    Now add the above controller to your application:
+
+    .. code-block:: php
+
+        <?php
+
+        // $app is an application
+        $app->get('_error/{$statusCode}', new ErrorPageController($app['exception_controller']));
+
 All in One
 ~~~~~~~~~~
 
