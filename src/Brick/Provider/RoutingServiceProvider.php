@@ -4,6 +4,7 @@ namespace Brick\Provider;
 
 use Brick\ControllerResolver;
 use Brick\Routing\ChainMatcher;
+use Brick\Routing\ChainUrlGenerator;
 use Brick\Routing\NullLoader;
 use Brick\Routing\AnnotationClassLoader;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -25,22 +26,21 @@ class RoutingServiceProvider implements \Silex\Api\ServiceProviderInterface
     public function register(Pimple $app)
     {
         $app->extend('url_matcher', function ($matcher, $app) {
-            // By overriding with a ChainRouter we get around trying to dump closures that
-            // are added, as they are added on the normal RouteCollection used by Silex.
-            // This also means that ->getRouteCollection() will not be called on the Router
-            // and it will therefor not be forced to reload its already cached routes.
             $matcher = new ChainMatcher(array($app['routing.router'], $matcher));
             $matcher->setContext($app['request_context']);
 
             return $matcher;
         });
 
-        $app->extend('resolver', function ($resolver, $app) {
-            return new ControllerResolver($resolver, $app);
+        $app->extend('url_generator', function ($generator, $app) {
+            $generator = new ChainUrlGenerator(array($app['routing.router'], $generator));
+            $generator->setContext($app['request_context']);
+
+            return $generator;
         });
 
-        $app['url_generator'] = $app->factory(function ($app) {
-            return $app['routing.router'];
+        $app->extend('resolver', function ($resolver, $app) {
+            return new ControllerResolver($resolver, $app);
         });
 
         $app['routing.config'] = function ($app) {

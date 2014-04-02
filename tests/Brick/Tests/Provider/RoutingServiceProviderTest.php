@@ -28,9 +28,9 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(sys_get_temp_dir(), $router->getOption('cache_dir'));
     }
 
-    public function testUrlGeneratorIsRouter()
+    public function testUrlGeneratorIsChainUrlGenerator()
     {
-        $this->assertSame($this->app['routing.router'], $this->app['url_generator']);
+        $this->assertInstanceOf('Brick\Routing\ChainUrlGenerator', $this->app['url_generator']);
     }
 
     public function testRoutingDefaults()
