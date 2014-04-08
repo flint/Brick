@@ -30,7 +30,16 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testUrlGeneratorIsChainUrlGenerator()
     {
+        $this->app['routing.options'] = array('resource' => 'routing.xml');
+        $this->app->get('/hello')->bind('silex');
+
+        // flush routes
+        $this->app->flush();
+
         $this->assertInstanceOf('Brick\Routing\ChainUrlGenerator', $this->app['url_generator']);
+
+        $this->assertEquals('/hello', $this->app['url_generator']->generate('router'));
+        $this->assertEquals('/hello', $this->app['url_generator']->generate('silex'));
     }
 
     public function testRoutingDefaults()
