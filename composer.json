@@ -4,17 +4,18 @@
     "license" : "MIT",
 
     "autoload" : {
-        "psr-0" : { "Brick\\" : "src" }
+        "psr-4" : { "Brick\\" : "src" }
     },
 
     "require" : {
-        "php"       : ">=5.3.3",
-        "silex/api" : "dev-2.0-experimental"
+        "php"       : ">=5.4.0",
+        "silex/api" : "2.0.x-dev",
+        "pimple/pimple" : "2.1.x-dev"
     },
 
     "require-dev" : {
-        "flint/tacker"         : ">=0.4,<=0.5",
-        "silex/silex"          : "dev-2.0-experimental",
+        "flint/tacker"         : "1.0.x-dev",
+        "silex/silex"          : "2.0.x-dev",
         "twig/twig"            : "~1.14",
         "doctrine/annotations" : "~1.0"
     },

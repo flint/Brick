@@ -18,11 +18,11 @@ use Symfony\Component\Routing\RequestContext;
 class ChainUrlGenerator implements UrlGeneratorInterface
 {
     private $context;
-    private $generators = array();
+    private $generators = [];
 
-    public function __construct($generators = array())
+    public function __construct($generators = [])
     {
-        array_walk($generators, array($this, 'add'));
+        array_walk($generators, [$this, 'add']);
     }
 
     public function add(UrlGeneratorInterface $generator)
@@ -40,7 +40,7 @@ class ChainUrlGenerator implements UrlGeneratorInterface
         return $this->context;
     }
 
-    public function generate($name, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    public function generate($name, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
         $notFound = null;
         $missingMandatory = null;

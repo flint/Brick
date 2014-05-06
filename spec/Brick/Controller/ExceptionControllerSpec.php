@@ -22,16 +22,16 @@ class ExceptionControllerSpec extends ObjectBehavior
      */
     function it_loops_through_templates_and_renders_response($template, $request, $exception, $twig)
     {
-        $templates = array(
+        $templates = [
             'Exception/error500.json.twig',
             'Exception/error.json.twig',
             'Exception/error.html.twig',
-        );
+        ];
 
         $exception->getStatusCode()->willReturn(500);
         $twig->resolveTemplate($templates)->willReturn($template);
 
-        $template->render(array('status_code' => 500, 'status_text' => 'Internal Server Error', 'exception' => $exception))
+        $template->render(['status_code' => 500, 'status_text' => 'Internal Server Error', 'exception' => $exception])
             ->shouldBeCalled()->willReturn('rendered_template');
 
         $template->getTemplateName()->willReturn('error500.json.twig');
@@ -69,7 +69,7 @@ class ExceptionControllerSpec extends ObjectBehavior
         $twig->resolveTemplate(Argument::any())->willThrow(new \Twig_Error_Loader(''));
 
         $exception->getStatusCode()->willReturn(500);
-        $exception->getHeaders()->willReturn(array());
+        $exception->getHeaders()->willReturn([]);
 
         $request->setRequestFormat('html')->shouldBeCalled();
 

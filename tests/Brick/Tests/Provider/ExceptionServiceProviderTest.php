@@ -4,16 +4,18 @@ namespace Brick\Tests\Provider;
 
 use Silex\Provider\TwigServiceProvider;
 use Brick\Provider\ExceptionServiceProvider;
-use Pimple;
+use Pimple\Container;
 
 class ExceptionServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->pimple = new Pimple(array(
-            'exception_handler' => function () { return 'exception_handler'; },
+        $this->pimple = new Container([
+            'exception_handler' => function () {
+                return 'exception_handler';
+            },
             'logger' => function () {},
-        ));
+        ]);
 
         $provider = new ExceptionServiceProvider;
         $provider->register($this->pimple);

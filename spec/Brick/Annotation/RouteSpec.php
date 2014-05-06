@@ -9,7 +9,7 @@ class RouteSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array());
+        $this->beConstructedWith([]);
     }
 
     function it_contains_service_name()

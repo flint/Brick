@@ -8,9 +8,9 @@
     },
 
     "require" : {
-        "php" : ">=5.3.3",
-        "pimple/pimple" : "~1.0",
-        "silex/api" : "*"
+        "php" : ">=5.4.0",
+        "pimple/pimple" : "2.1.x-dev",
+        "silex/api" : "2.0.x-dev"
     },
 
     "extra" : {

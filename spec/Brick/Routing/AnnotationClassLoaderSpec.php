@@ -29,16 +29,16 @@ class AnnotationClassLoaderSpec extends ObjectBehavior
     function it_sets_the_constroller_based_on_reflection($annotation, $reader)
     {
         $reader->getMethodAnnotations(Argument::type('ReflectionMethod'))
-            ->willReturn(array($annotation));
+            ->willReturn([$annotation]);
 
         $reader->getClassAnnotation(Argument::type('ReflectionClass'), 'Symfony\Component\Routing\Annotation\Route')
-            ->willReturn(array());
+            ->willReturn([]);
 
-        $annotation->getDefaults()->willReturn(array());
-        $annotation->getRequirements()->willReturn(array());
-        $annotation->getOptions()->willReturn(array());
-        $annotation->getSchemes()->willReturn(array());
-        $annotation->getMethods()->willReturn(array());
+        $annotation->getDefaults()->willReturn([]);
+        $annotation->getRequirements()->willReturn([]);
+        $annotation->getOptions()->willReturn([]);
+        $annotation->getSchemes()->willReturn([]);
+        $annotation->getMethods()->willReturn([]);
         $annotation->getHost()->willReturn();
         $annotation->getCondition()->willReturn();
         $annotation->getPath()->willReturn();
@@ -57,16 +57,16 @@ class AnnotationClassLoaderSpec extends ObjectBehavior
     function it_sets_the_constroller_based_on_annotation_service($annotation, $reader)
     {
         $reader->getMethodAnnotations(Argument::type('ReflectionMethod'))
-            ->willReturn(array($annotation));
+            ->willReturn([$annotation]);
 
         $reader->getClassAnnotation(Argument::type('ReflectionClass'), 'Symfony\Component\Routing\Annotation\Route')
-            ->willReturn(array());
+            ->willReturn([]);
 
-        $annotation->getDefaults()->willReturn(array());
-        $annotation->getRequirements()->willReturn(array());
-        $annotation->getOptions()->willReturn(array());
-        $annotation->getSchemes()->willReturn(array());
-        $annotation->getMethods()->willReturn(array());
+        $annotation->getDefaults()->willReturn([]);
+        $annotation->getRequirements()->willReturn([]);
+        $annotation->getOptions()->willReturn([]);
+        $annotation->getSchemes()->willReturn([]);
+        $annotation->getMethods()->willReturn([]);
         $annotation->getHost()->willReturn();
         $annotation->getCondition()->willReturn();
         $annotation->getPath()->willReturn();

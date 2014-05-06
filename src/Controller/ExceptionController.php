@@ -21,17 +21,15 @@ class ExceptionController
         $statusCode = $exception->getStatusCode();
 
         try {
-            $template = $this->twig->resolveTemplate(array(
+            $template = $this->twig->resolveTemplate([
                 'Exception/error' . $statusCode . '.' . $format . '.twig',
                 'Exception/error.' . $format . '.twig',
                 'Exception/error.html.twig',
-            ));
+            ]);
         } catch (\Twig_Error_Loader $e) {
             $request->setRequestFormat('html');
 
-            $handler = new ExceptionHandler(false);
-
-            return $handler->createResponse($exception);
+            return (new ExceptionHandler(false))->createResponse($exception);
         }
 
         // We cannot find a template that matches the precise format so we will default
@@ -40,11 +38,11 @@ class ExceptionController
             $request->setRequestFormat('html');
         }
 
-        $variables = array(
+        $variables = [
             'exception'   => $exception,
             'status_code' => $statusCode,
             'status_text' => isset(Response::$statusTexts[$statusCode]) ? Response::$statusTexts[$statusCode] : '',
-        );
+        ];
 
         return new Response($template->render($variables), $statusCode);
     }

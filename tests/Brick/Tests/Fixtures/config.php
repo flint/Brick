@@ -1,7 +1,7 @@
 <?php
 
-return array(
+return [
     'hello' => 'world',
     'pimple_normalized' => '%root_dir%',
     'env_normalized' => '#BRICK_PHPUNIT#',
-);
+];

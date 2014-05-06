@@ -9,7 +9,7 @@ class ControllerResolverSpec extends ObjectBehavior
 {
     /**
      * @param Symfony\Component\HttpKernel\Controller\ControllerResolver $resolver
-     * @param Pimple $pimple
+     * @param Pimple\Container $pimple
      */
     function let($resolver, $pimple)
     {
@@ -21,9 +21,9 @@ class ControllerResolverSpec extends ObjectBehavior
      */
     function it_proxies_get_arguments_to_composed_resolver($request, $resolver)
     {
-        $resolver->getArguments($request, 'controller')->shouldBeCalled()->willReturn(array());
+        $resolver->getArguments($request, 'controller')->shouldBeCalled()->willReturn([]);
 
-        $this->getArguments($request, 'controller')->shouldReturn(array());
+        $this->getArguments($request, 'controller')->shouldReturn([]);
     }
 
     /**
@@ -32,11 +32,11 @@ class ControllerResolverSpec extends ObjectBehavior
      */
     function it_sets_pimple_on_controller_when_it_is_pimpleaware($controller, $request, $resolver, $pimple)
     {
-        $resolver->getController($request)->willReturn(array($controller, 'indexAction'));
+        $resolver->getController($request)->willReturn([$controller, 'indexAction']);
 
         $controller->setPimple($pimple)->shouldBeCalled();
 
-        $this->getController($request)->shouldReturn(array($controller, 'indexAction'));
+        $this->getController($request)->shouldReturn([$controller, 'indexAction']);
     }
 
     /**

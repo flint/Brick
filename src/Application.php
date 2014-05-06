@@ -8,7 +8,7 @@ use Brick\Provider\ExceptionServiceProvider;
 
 class Application extends \Silex\Application
 {
-    public function __construct(array $values = array())
+    public function __construct(array $values = [])
     {
         parent::__construct($values);
 

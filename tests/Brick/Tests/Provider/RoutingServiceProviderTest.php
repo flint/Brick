@@ -10,17 +10,17 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->app = new Application(array('root_dir' => __DIR__ . '/../Fixtures', 'debug' => true));
+        $this->app = new Application(['root_dir' => __DIR__ . '/../Fixtures', 'debug' => true]);
         $this->app->register(new RoutingServiceProvider);
     }
 
     public function testOptionsReachRouter()
     {
-        $this->app['routing.options'] = array(
-            'resource' => 'routing.xml',
+        $this->app['routing.options'] = [
+            'resource'  => 'routing.xml',
             'cache_dir' => sys_get_temp_dir(),
-            'debug' => false,
-        );
+            'debug'     => false,
+        ];
 
         $router = $this->app['routing.router'];
 
@@ -30,7 +30,7 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testUrlGeneratorIsChainUrlGenerator()
     {
-        $this->app['routing.options'] = array('resource' => 'routing.xml');
+        $this->app['routing.options'] = ['resource' => 'routing.xml'];
         $this->app->get('/hello')->bind('silex');
 
         // flush routes
@@ -71,12 +71,12 @@ class RoutingServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function routerProvider()
     {
-        return array(
-            array(null, 'world from silex closure'),
-            array('routing.xml', 'world from xml'),
-            array('routing.php', 'world from php'),
-            array('routing.yml', 'world from yml'),
-            array('routing_annotation.yml', 'world from file annotation'),
-        );
+        return [
+            [null, 'world from silex closure'],
+            ['routing.xml', 'world from xml'],
+            ['routing.php', 'world from php'],
+            ['routing.yml', 'world from yml'],
+            ['routing_annotation.yml', 'world from file annotation'],
+        ];
     }
 }

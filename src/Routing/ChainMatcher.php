@@ -21,10 +21,10 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
  */
 class ChainMatcher implements UrlMatcherInterface, RequestMatcherInterface
 {
-    protected $matchers = array();
+    protected $matchers = [];
     protected $context;
 
-    public function __construct($matchers = array())
+    public function __construct($matchers = [])
     {
         foreach ($matchers as $matcher) {
             $this->add($matcher);
@@ -87,7 +87,7 @@ class ChainMatcher implements UrlMatcherInterface, RequestMatcherInterface
 
     protected function sort()
     {
-        $matchers = array();
+        $matchers = [];
 
         krsort($this->matchers);
 

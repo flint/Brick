@@ -2,7 +2,7 @@
 
 namespace Brick;
 
-use Pimple;
+use Pimple\Container;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -11,7 +11,7 @@ class ControllerResolver implements ControllerResolverInterface
     protected $pimple;
     protected $resolver;
 
-    public function __construct(ControllerResolverInterface $resolver, Pimple $pimple)
+    public function __construct(ControllerResolverInterface $resolver, Container $pimple)
     {
         $this->resolver = $resolver;
         $this->pimple = $pimple;

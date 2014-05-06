@@ -13,7 +13,7 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
      */
     function let($first, $second)
     {
-        $this->beConstructedWith(array($first, $second));
+        $this->beConstructedWith([$first, $second]);
     }
 
     function its_a_url_generator()
@@ -23,9 +23,9 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
 
     function it_rethrows_not_found_exception($first)
     {
-        $this->beConstructedWith(array($first));
+        $this->beConstructedWith([$first]);
 
-        $first->generate('route_name', array(), false)
+        $first->generate('route_name', [], false)
             ->shouldBeCalled()->willThrow('Symfony\Component\Routing\Exception\RouteNotFoundException');
 
         $this->shouldThrow('Symfony\Component\Routing\Exception\RouteNotFoundException')
@@ -34,10 +34,10 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
 
     function it_generates_in_a_chain($first, $second)
     {
-        $first->generate('route_name', array(), false)
+        $first->generate('route_name', [], false)
             ->shouldBeCalled()->willThrow('Symfony\Component\Routing\Exception\RouteNotFoundException');
 
-        $second->generate('route_name', array(), false)
+        $second->generate('route_name', [], false)
             ->shouldBeCalled()->willReturn('this-is-my-url');
 
         $this->generate('route_name')->shouldReturn('this-is-my-url');
@@ -45,10 +45,10 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
 
     function it_prioritize_invalid_over_missing($first, $second)
     {
-        $first->generate('route_name', array(), false)
+        $first->generate('route_name', [], false)
             ->willThrow('Symfony\Component\Routing\Exception\MissingMandatoryParametersException');
 
-        $second->generate('route_name', array(), false)
+        $second->generate('route_name', [], false)
             ->willThrow('Symfony\Component\Routing\Exception\InvalidParameterException');
 
         $this->shouldThrow('Symfony\Component\Routing\Exception\InvalidParameterException')
@@ -57,10 +57,10 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
 
     function it_prioritize_missing_over_not_found($first, $second)
     {
-        $first->generate('route_name', array(), false)
+        $first->generate('route_name', [], false)
             ->willThrow('Symfony\Component\Routing\Exception\RouteNotFoundException');
 
-        $second->generate('route_name', array(), false)
+        $second->generate('route_name', [], false)
             ->shouldBeCalled()->willThrow('Symfony\Component\Routing\Exception\MissingMandatoryParametersException');
 
         $this->shouldThrow('Symfony\Component\Routing\Exception\MissingMandatoryParametersException')

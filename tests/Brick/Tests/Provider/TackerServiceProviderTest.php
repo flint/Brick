@@ -2,8 +2,8 @@
 
 namespace Brick\Tests\Provider;
 
-use Pimple;
 use Brick\Provider\TackerServiceProvider;
+use Pimple\Container;
 
 class TackerServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,29 +14,29 @@ class TackerServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultConfig()
     {
-        $this->provider->register($pimple = new Pimple);
+        $this->provider->register($pimple = new Container);
 
-        $this->assertEquals(array('debug' => true, 'paths' => array(), 'cache_dir' => null), $pimple['tacker.config']);
+        $this->assertEquals(['debug' => true, 'paths' => [], 'cache_dir' => null], $pimple['tacker.config']);
 
-        $params = array('root_dir' => __DIR__, 'debug' => false, 'tacker.options' => array(
+        $params = ['root_dir' => __DIR__, 'debug' => false, 'tacker.options' => [
             'cache_dir' => sys_get_temp_dir(),
-        ));
+        ]];
 
-        $this->provider->register($pimple = new Pimple($params));
+        $this->provider->register($pimple = new Container($params));
 
-        $this->assertEquals(array('debug' => false, 'paths' => array(__DIR__), 'cache_dir' => sys_get_temp_dir()), $pimple['tacker.config']);
+        $this->assertEquals(['debug' => false, 'paths' => [__DIR__], 'cache_dir' => sys_get_temp_dir()], $pimple['tacker.config']);
     }
 
     public function testDebugAndCacheIsSetOnLoader()
     {
-        $this->provider->register($pimple = new Pimple);
+        $this->provider->register($pimple = new Container);
 
         $this->assertInternalType('null', $pimple['tacker.loader']->getCacheDir());
         $this->assertTrue($pimple['tacker.loader']->getDebug());
 
-        $this->provider->register($pimple = new Pimple(array(
-            'tacker.options' => array('debug' => false, 'cache_dir' => sys_get_temp_dir()),
-        )));
+        $this->provider->register($pimple = new Container([
+            'tacker.options' => ['debug' => false, 'cache_dir' => sys_get_temp_dir()],
+        ]));
 
         $this->assertEquals(sys_get_temp_dir(), $pimple['tacker.loader']->getCacheDir());
         $this->assertFalse($pimple['tacker.loader']->getDebug());
@@ -47,9 +47,9 @@ class TackerServiceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadConfig($file)
     {
-        $this->provider->register($pimple = new Pimple(array(
+        $this->provider->register($pimple = new Container([
             'root_dir' => __DIR__ . '/../Fixtures',
-        )));
+        ]));
 
         $pimple['tacker.configurator']->configure($pimple, $file);
 
@@ -60,11 +60,11 @@ class TackerServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function loadConfigProvider()
     {
-        return array(
-            array('config.json'),
-            array('config.php'),
-            array('config.yml'),
-            array('config.ini'),
-        );
+        return [
+            ['config.json'],
+            ['config.php'],
+            ['config.yml'],
+            ['config.ini'],
+        ];
     }
 }

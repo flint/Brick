@@ -13,12 +13,12 @@ class ChainMatcherSpec extends \PhpSpec\ObjectBehavior
      */
     function let($matcher, $context)
     {
-        $this->beConstructedWith(array($matcher));
+        $this->beConstructedWith([$matcher]);
     }
 
     function it_throws_exception_when_no_matcher_matches_route()
     {
-        $this->beConstructedWith(array());
+        $this->beConstructedWith([]);
 
         $this->shouldThrow('Symfony\Component\Routing\Exception\ResourceNotFoundException')
             ->duringMatch('/path');
@@ -65,7 +65,7 @@ class ChainMatcherSpec extends \PhpSpec\ObjectBehavior
         $matcher->setContext($context)->shouldBeCalled();
 
         $first->match('/path')->willThrow('Symfony\Component\Routing\Exception\ResourceNotFoundException');
-        $matcher->match('/path')->willThrow(new MethodNotAllowedException(array()));
+        $matcher->match('/path')->willThrow(new MethodNotAllowedException([]));
 
         $this->setContext($context);
 
