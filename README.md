@@ -29,5 +29,5 @@ First install https://github.com/dflydev/git-subsplit. Then update the subsplit 
 repository.
 
 ``` bash
-$ git subsplit publish src/Brick/Provider:git@github.com:flint/providers.git --heads=master --update
+$ git subsplit publish src/Provider:git@github.com:flint/providers.git --heads=master --update
 ```
