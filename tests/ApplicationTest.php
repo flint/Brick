@@ -9,10 +9,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->app = new Application([
-            'root_dir' => __DIR__ . '/Fixtures',
-            'debug' => true,
-        ]);
+        $this->rootDir = __DIR__ . '/Fixtures';
+
+        $this->app = new Application($this->rootDir);
+    }
+
+    public function testDefaultsAreSet()
+    {
+        $this->assertEquals(__DIR__ . '/Fixtures', $this->app['root_dir']);
+        $this->assertTrue($this->app['debug']);
     }
 
     public function testServicesExists()

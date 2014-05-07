@@ -15,7 +15,7 @@
 
     <testsuites>
         <testsuite name="Brick Test Suite">
-            <directory>./tests/Brick/Tests</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 

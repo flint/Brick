@@ -8,9 +8,9 @@ use Brick\Provider\ExceptionServiceProvider;
 
 class Application extends \Silex\Application
 {
-    public function __construct(array $values = [])
+    public function __construct($rootDir, $debug = true, array $values = [])
     {
-        parent::__construct($values);
+        parent::__construct(['root_dir' => $rootDir, 'debug' => $debug] + $values);
 
         $this->register(new RoutingServiceProvider);
         $this->register(new TackerServiceProvider);

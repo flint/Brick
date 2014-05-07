@@ -7,6 +7,10 @@
         "psr-4" : { "Brick\\" : "src" }
     },
 
+    "autoload-dev" : {
+        "psr-4" : { "Brick\\Tests\\" : "tests" }
+    },
+
     "require" : {
         "php"       : ">=5.4.0",
         "silex/api" : "2.0.x-dev",
