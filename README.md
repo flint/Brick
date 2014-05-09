@@ -12,6 +12,11 @@ only its Api package.
 
 Because the next Pimple and Silex versions are still in development, usage of Brick is currently not recommended.
 
+Documentation
+-------------
+
+Documentation can be found in the `doc` directory or rendered [at read the docs.](http://brick.rtfd.org).
+
 Tests
 -----
 
