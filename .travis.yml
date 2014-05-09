@@ -11,9 +11,10 @@ env:
     - PIMPLE=yes
 
 before_script:
-    - if [[ "$PIMPLE" == 1 ]]; then echo "PIMPLE C EXTENSION"; fi
     - composer require phpspec/phpspec:~2.0 --no-update
     - composer install
+    - if [[ "$PIMPLE" == "yes" ]]; then cd vendor/pimple/pimple/ext/pimple; phpize; ./configure; make install; fi
+    - if [[ "$PIMPLE" == "yes" ]]; then echo "extension=pimple.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/pimple.ini; fi
 
 script:
     - phpunit
