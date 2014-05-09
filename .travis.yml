@@ -6,9 +6,14 @@ php:
     - 5.6
     - hhvm
 
+env:
+    - PIMPLE=no
+    - PIMPLE=yes
+
 before_script:
-    - "composer require phpspec/phpspec:~2.0 --no-update"
-    - "composer install"
+    - if [[ "$PIMPLE" == 1 ]]; then echo "PIMPLE C EXTENSION"; fi
+    - composer require phpspec/phpspec:~2.0 --no-update
+    - composer install
 
 script:
     - phpunit
