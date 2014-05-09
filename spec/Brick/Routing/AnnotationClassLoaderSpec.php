@@ -5,7 +5,7 @@ namespace spec\Brick\Routing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-require __DIR__ . '/../../../tests/Brick/Tests/Fixtures/FixtureController.php';
+require __DIR__ . '/../../../tests/Fixtures/FixtureController.php';
 
 class AnnotationClassLoaderSpec extends ObjectBehavior
 {
