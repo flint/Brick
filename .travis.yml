@@ -16,8 +16,13 @@ git:
 before_script:
     - composer require phpspec/phpspec:~2.0 --no-update
     - composer install
-    - if [[ "$PIMPLE" == "yes" ]]; then cd vendor/pimple/pimple/ext/pimple; phpize; ./configure; make install; cd $TRAVIS_BUILD_DIR; fi
-    - if [[ "$PIMPLE" == "yes" ]]; then echo "extension=pimple.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/pimple.ini; fi
+    - >
+        if [[ "$PIMPLE" == "yes" && "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then
+            cd vendor/pimple/pimple/ext/pimple
+            phpize && ./configure && make install
+            cd $TRAVIS_BUILD_DIR
+            echo "extension=pimple.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/pimple.ini
+        fi
 
 script:
     - phpunit
