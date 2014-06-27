@@ -8,7 +8,6 @@ use Brick\Routing\ChainUrlGenerator;
 use Brick\Routing\NullLoader;
 use Brick\Routing\AnnotationClassLoader;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\FileCacheReader;
 use Pimple\Container;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -65,7 +64,6 @@ class RoutingServiceProvider implements \Pimple\ServiceProviderInterface
 
             return new Router($pimple['routing.loader'], $resource, $config, $pimple['request_context'], $pimple['logger']);
         };
-
 
         $pimple['routing.loader_resolver'] = function ($pimple) {
             $locator = $pimple['routing.locator'];
