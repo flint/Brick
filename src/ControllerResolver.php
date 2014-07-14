@@ -26,7 +26,7 @@ class ControllerResolver implements ControllerResolverInterface
         }
 
         if ($controller[0] instanceof PimpleAware) {
-            $controller[0]->setPimple($this->pimple);
+            $controller[0]->setContainer($this->pimple);
         }
 
         return $controller;

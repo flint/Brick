@@ -6,5 +6,5 @@ use Pimple\Container;
 
 interface PimpleAware
 {
-    public function setPimple(Container $pimple = null);
+    public function setContainer(Container $pimple = null);
 }

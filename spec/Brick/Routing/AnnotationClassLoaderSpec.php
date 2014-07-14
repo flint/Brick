@@ -5,7 +5,7 @@ namespace spec\Brick\Routing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-require __DIR__ . '/../../../tests/Fixtures/FixtureController.php';
+require __DIR__ . '/../../../tests/Fixtures/AnnotatedController.php';
 
 class AnnotationClassLoaderSpec extends ObjectBehavior
 {
@@ -44,11 +44,11 @@ class AnnotationClassLoaderSpec extends ObjectBehavior
         $annotation->getPath()->willReturn();
         $annotation->getName()->willReturn();
 
-        $route = $this->load('Brick\Tests\Fixtures\FixtureController')
-            ->get('brick_tests_fixtures_fixturecontroller_helloaction');
+        $route = $this->load('Brick\Tests\Fixtures\AnnotatedController')
+            ->get('brick_tests_fixtures_annotatedcontroller_helloaction');
 
         $route->getDefault('_controller')
-            ->shouldReturn('Brick\Tests\Fixtures\FixtureController::helloAction');
+            ->shouldReturn('Brick\Tests\Fixtures\AnnotatedController::helloAction');
     }
 
     /**
@@ -73,8 +73,8 @@ class AnnotationClassLoaderSpec extends ObjectBehavior
         $annotation->getName()->willReturn();
         $annotation->getService()->willReturn('my_service_id');
 
-        $route = $this->load('Brick\Tests\Fixtures\FixtureController')
-            ->get('brick_tests_fixtures_fixturecontroller_helloaction');
+        $route = $this->load('Brick\Tests\Fixtures\AnnotatedController')
+            ->get('brick_tests_fixtures_annotatedcontroller_helloaction');
 
         $route->getDefault('_controller')
             ->shouldReturn('my_service_id:helloAction');

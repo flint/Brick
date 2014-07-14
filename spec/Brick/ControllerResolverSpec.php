@@ -34,7 +34,7 @@ class ControllerResolverSpec extends ObjectBehavior
     {
         $resolver->getController($request)->willReturn([$controller, 'indexAction']);
 
-        $controller->setPimple($pimple)->shouldBeCalled();
+        $controller->setContainer($pimple)->shouldBeCalled();
 
         $this->getController($request)->shouldReturn([$controller, 'indexAction']);
     }

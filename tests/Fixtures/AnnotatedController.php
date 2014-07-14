@@ -4,7 +4,7 @@ namespace Brick\Tests\Fixtures;
 
 use Symfony\Component\Routing\Annotation\Route;
 
-class FixtureController
+class AnnotatedController
 {
     /**
      * @Route("/hello", defaults={"format"="file annotation"})
