@@ -12,14 +12,14 @@
     },
 
     "require" : {
-        "php"       : ">=5.4.0",
-        "silex/api" : "2.0.x-dev",
-        "pimple/pimple" : "~2.1"
+        "php"           : ">=5.4.0",
+        "silex/api"     : "2.0.x-dev",
+        "pimple/pimple" : "~3.0"
     },
 
     "require-dev" : {
-        "flint/tacker"         : "1.0.x-dev",
         "silex/silex"          : "2.0.x-dev",
+        "flint/tacker"         : "~1.0",
         "twig/twig"            : "~1.14",
         "doctrine/annotations" : "~1.0"
     },

@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ControllerResolver implements ControllerResolverInterface
 {
-    protected $pimple;
-    protected $resolver;
+    private $pimple;
+    private $resolver;
 
     public function __construct(ControllerResolverInterface $resolver, Container $pimple)
     {
