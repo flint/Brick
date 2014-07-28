@@ -20,7 +20,7 @@
 
     "require-dev" : {
         "silex/silex"          : "2.0.x-dev",
-        "flint/tacker"         : "dev-master",
+        "flint/tacker"         : "~1.1",
         "twig/twig"            : "~1.14",
         "doctrine/annotations" : "~1.0"
     },
