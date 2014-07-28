@@ -6,24 +6,13 @@ php:
     - 5.6
     - hhvm
 
-env:
-    - PIMPLE=no
-    - PIMPLE=yes
-
 git:
     submodules: false
 
 before_script:
     - composer require phpspec/phpspec:~2.0 --no-update
     - composer install
-    - >
-        if [[ "$PIMPLE" == "yes" && "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then
-            cd vendor/pimple/pimple/ext/pimple
-            phpize && ./configure && make install
-            cd $TRAVIS_BUILD_DIR
-            echo "extension=pimple.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/pimple.ini
-        fi
 
 script:
-    - phpunit
     - ./vendor/bin/phpspec run -fpretty
+    - phpunit
