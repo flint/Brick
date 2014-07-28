@@ -27,21 +27,6 @@ class TackerServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['debug' => false, 'paths' => [__DIR__], 'cache_dir' => sys_get_temp_dir()], $pimple['tacker.config']);
     }
 
-    public function testDebugAndCacheIsSetOnLoader()
-    {
-        $this->provider->register($pimple = new Container);
-
-        $this->assertInternalType('null', $pimple['tacker.loader']->getCacheDir());
-        $this->assertTrue($pimple['tacker.loader']->getDebug());
-
-        $this->provider->register($pimple = new Container([
-            'tacker.options' => ['debug' => false, 'cache_dir' => sys_get_temp_dir()],
-        ]));
-
-        $this->assertEquals(sys_get_temp_dir(), $pimple['tacker.loader']->getCacheDir());
-        $this->assertFalse($pimple['tacker.loader']->getDebug());
-    }
-
     /**
      * @dataProvider loadConfigProvider
      */
