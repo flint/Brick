@@ -9,7 +9,7 @@ abstract class AbstractController implements PimpleAware
 {
     protected $pimple;
 
-    public function setPimple(Container $pimple = null)
+    public function setContainer(Container $pimple = null)
     {
         $this->pimple = $pimple;
     }
