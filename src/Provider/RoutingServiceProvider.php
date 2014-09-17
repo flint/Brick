@@ -24,7 +24,7 @@ class RoutingServiceProvider implements \Pimple\ServiceProviderInterface
 {
     public function register(Container $pimple)
     {
-        $pimple->extend('url_matcher', function ($matcher, $pimple) {
+        $pimple->extend('request_matcher', function ($matcher, $pimple) {
             $matcher = new ChainMatcher([$pimple['routing.router'], $matcher]);
             $matcher->setContext($pimple['request_context']);
 
