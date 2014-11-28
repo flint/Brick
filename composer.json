@@ -3,6 +3,8 @@
     "description" : "Binds Symfony and Flint components together with Silex",
     "license" : "MIT",
 
+    "minimum-stability" : "beta",
+
     "autoload" : {
         "psr-4" : { "Brick\\" : "src" }
     },
@@ -20,9 +22,11 @@
 
     "require-dev" : {
         "silex/silex"          : "2.0.x-dev",
+        "silex/web-profiler"   : "dev-master",
         "flint/tacker"         : "~1.1",
         "twig/twig"            : "~1.14",
-        "doctrine/annotations" : "~1.0"
+        "doctrine/annotations" : "~1.0",
+        "symfony/debug-bundle" : "~2.6"
     },
 
     "extra" : {
