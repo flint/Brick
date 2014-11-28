@@ -49,7 +49,9 @@ class DebugServiceProvider implements ServiceProviderInterface, EventListenerPro
             $pimple['data_collector.templates'] = array_merge($pimple['data_collector.templates'], [['dump', '@Debug/Profiler/dump.html.twig']]);
 
             $pimple->extend('data_collectors', function ($collectors, $app) {
-                $collectors['dump'] = $app->raw('debug.data_collector');
+                $collectors['dump'] = function ($app) {
+                    return $app['debug.data_collector'];
+                };
 
                 return $collectors;
             });
