@@ -23,17 +23,30 @@ class DebugServiceProvider implements ServiceProviderInterface, EventListenerPro
             return new DumpDataCollector($app['stopwatch']);
         };
 
-        if (class_exists('Symfony\\Component\\HttpKernel\\EventListener\\DumpListener')) {
-            $pimple->extend('twig', function ($twig, $pimple) {
-                $twig->addExtension(new DumpExtension($pimple['debug.cloner'])); // needs debug.cloner
+        if (isset($pimple['twig'])) {
+            if (class_exists('Symfony\\Component\\HttpKernel\\EventListener\\DumpListener')) {
+                $pimple->extend('twig', function ($twig, $pimple) {
+                    $twig->addExtension(new DumpExtension($pimple['debug.cloner']));
 
-                return $twig;
+                    return $twig;
+                });
+            }
+
+            $pimple->extend('twig.loader.filesystem', function ($loader, $app) {
+                // The only class we could use to find the directory depends on DependencyInjection component
+                // which we dont use. For that reason we try and find the vendor dir instead, and use that.
+                $r = new \ReflectionClass('Silex\Application');
+                $views = dirname($r->getFilename()) . '/../../../../symfony/debug-bundle/Symfony/Bundle/DebugBundle/Resources/views';
+
+                $loader->addPath($views, 'Debug');
+
+                return $loader;
             });
         }
 
         // if the provider exists do some stuff
         if (isset($pimple['data_collectors'])) {
-            $pimple['data_collector.templates'] = [['dump', '@Debug/Profiler/dump.html.twig']] + $pimple['data_collector.templates'];
+            $pimple['data_collector.templates'] = array_merge($pimple['data_collector.templates'], [['dump', '@Debug/Profiler/dump.html.twig']]);
 
             $pimple->extend('data_collectors', function ($collectors, $app) {
                 $collectors['dump'] = $app->raw('debug.data_collector');
