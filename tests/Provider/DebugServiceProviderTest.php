@@ -40,7 +40,7 @@ class DebugServiceProviderTest extends \PHPUnit_Framework_TestCase
         // mimic the provider, so we can compare the objects.
         $this->assertEquals($this->app['debug.data_collector'], $collectors['dump']($this->app));
 
-        $this->assertTrue(in_array(['dump' => '@Debug/Profiler/dump.html.twig'], $this->app['data_collector.templates'], true));
+        $this->assertTrue(in_array(['dump', '@Debug/Profiler/dump.html.twig'], $this->app['data_collector.templates'], true));
     }
 
     public function testTwigExtensionIsRegistered()
