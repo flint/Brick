@@ -23,6 +23,16 @@ class DebugServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($this->app['debug.data_collector']));
     }
 
+    public function testDumpListenerIsRegistered()
+    {
+        $dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $dispatcher->expects($this->once())->method('addSubscriber');
+
+        $provider = new DebugServiceProvider;
+        $provider->register($this->app);
+        $provider->subscribe($this->app, $dispatcher);
+    }
+
     public function testDataCollectorIsRegistered()
     {
         $collectors = $this->app['data_collectors'];

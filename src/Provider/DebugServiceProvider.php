@@ -8,6 +8,7 @@ use Silex\Api\EventListenerProviderInterface;
 use Symfony\Bridge\Twig\Extension\DumpExtension;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\DataCollector\DumpDataCollector;
+use Symfony\Component\HttpKernel\EventListener\DumpListener;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 
 class DebugServiceProvider implements ServiceProviderInterface, EventListenerProviderInterface
@@ -46,7 +47,7 @@ class DebugServiceProvider implements ServiceProviderInterface, EventListenerPro
     {
         if (isset($app['data_collectors'])) {
             $dispatcher->addSubscriber(
-                new DumpListener($app['debug.cloner'], $app['debug.dump_data_collector'])
+                new DumpListener($app['debug.cloner'], $app['debug.data_collector'])
             );
         }
     }

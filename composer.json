@@ -26,7 +26,8 @@
         "flint/tacker"         : "~1.1",
         "twig/twig"            : "~1.14",
         "doctrine/annotations" : "~1.0",
-        "symfony/debug-bundle" : "~2.6"
+        "symfony/debug-bundle" : "~2.6",
+        "symfony/http-kernel"  : "~2.7@dev"
     },
 
     "extra" : {
