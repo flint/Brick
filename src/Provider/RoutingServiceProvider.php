@@ -94,7 +94,7 @@ class RoutingServiceProvider implements \Pimple\ServiceProviderInterface
             return new FileLocator($pimple['routing.config']['paths']);
         };
 
-        $pimple['routing.annotation_reader'] = function ($pimple) {
+        $pimple['routing.annotation_reader'] = function () {
             return new AnnotationReader;
         };
     }
