@@ -32,7 +32,7 @@ class DebugServiceProvider implements ServiceProviderInterface, EventListenerPro
                 });
             }
 
-            $pimple->extend('twig.loader.filesystem', function ($loader, $app) {
+            $pimple->extend('twig.loader.filesystem', function ($loader) {
                 // The only class we could use to find the directory depends on DependencyInjection component
                 // which we dont use. For that reason we try and find the vendor dir instead, and use that.
                 $r = new \ReflectionClass('Silex\Application');
@@ -44,7 +44,6 @@ class DebugServiceProvider implements ServiceProviderInterface, EventListenerPro
             });
         }
 
-        // if the provider exists do some stuff
         if (isset($pimple['data_collectors'])) {
             $pimple['data_collector.templates'] = array_merge($pimple['data_collector.templates'], [['dump', '@Debug/Profiler/dump.html.twig']]);
 
