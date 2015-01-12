@@ -17,15 +17,12 @@ class ExceptionServiceProviderTest extends \PHPUnit_Framework_TestCase
             'logger' => function () {},
         ]);
 
-        $provider = new ExceptionServiceProvider;
-        $provider->register($this->pimple);
+        $this->pimple->register(new TwigServiceProvider);
+        $this->pimple->register(new ExceptionServiceProvider);
     }
 
     public function testOverrideExceptionHandler()
     {
-        $provider = new TwigServiceProvider;
-        $provider->register($this->pimple);
-
         $this->assertInstanceOf('Symfony\Component\HttpKernel\EventListener\ExceptionListener', $this->pimple['exception_handler']);
     }
 

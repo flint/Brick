@@ -10,12 +10,14 @@ class ExceptionServiceProvider implements \Pimple\ServiceProviderInterface
 {
     public function register(Container $pimple)
     {
-        $pimple['exception_controller'] = function ($pimple) {
-            return new ExceptionController($pimple['twig']);
-        };
+        if (isset($pimple['twig'])) {
+            $pimple['exception_controller'] = function ($pimple) {
+                return new ExceptionController($pimple['twig']);
+            };
 
-        $pimple->extend('exception_handler', function ($handler, $pimple) {
-            return new ExceptionListener($pimple['exception_controller'], $pimple['logger']);
-        });
+            $pimple->extend('exception_handler', function ($handler, $pimple) {
+                return new ExceptionListener($pimple['exception_controller'], $pimple['logger']);
+            });
+        }
     }
 }

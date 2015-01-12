@@ -12,9 +12,9 @@ class Application extends \Silex\Application
     {
         parent::__construct(['root_dir' => $rootDir, 'debug' => $debug] + $values);
 
+        $this->register(new ExceptionServiceProvider);
         $this->register(new RoutingServiceProvider);
         $this->register(new TackerServiceProvider);
-        $this->register(new ExceptionServiceProvider);
     }
 
     public function configure($resource)
