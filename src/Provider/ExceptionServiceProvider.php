@@ -15,11 +15,7 @@ class ExceptionServiceProvider implements \Pimple\ServiceProviderInterface
         };
 
         $pimple->extend('exception_handler', function ($handler, $pimple) {
-            if (isset($pimple['twig']) && !$pimple['debug']) {
-                return new ExceptionListener($pimple['exception_controller'], $pimple['logger']);
-            }
-
-            return $handler;
+            return new ExceptionListener($pimple['exception_controller'], $pimple['logger']);
         });
     }
 }
