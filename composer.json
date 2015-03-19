@@ -25,8 +25,12 @@
         "twig/twig"            : "~1.14",
         "doctrine/annotations" : "~1.0",
         "symfony/debug-bundle" : "~2.6",
-        "symfony/http-kernel"  : "~2.7@dev"
+        "symfony/http-kernel"  : "~2.7@dev",
+        "puli/discovery"       : "~1.0",
+        "puli/repository"      : "~1.0"
     },
+
+    "minimum-stability" : "beta",
 
     "extra" : {
         "branch-alias" : {

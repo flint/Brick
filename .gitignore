@@ -2,3 +2,5 @@
 composer.lock
 vendor/
 .subsplit
+.puli/
+puli.json
