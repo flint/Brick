@@ -23,7 +23,7 @@ git:
 
 before_script:
     - composer require phpspec/phpspec:~2.0 --no-update
-    - composer install
+    - composer update
 
 script:
     - ./vendor/bin/phpspec run -fpretty
