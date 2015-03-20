@@ -19,15 +19,15 @@
     },
 
     "require-dev" : {
-        "silex/silex"          : "2.0.x-dev",
-        "silex/web-profiler"   : "dev-master",
-        "flint/tacker"         : "~1.1",
-        "twig/twig"            : "~1.14",
-        "doctrine/annotations" : "~1.0",
-        "symfony/debug-bundle" : "~2.6",
-        "symfony/http-kernel"  : "~2.7@dev",
+        "silex/silex"           : "2.0.x-dev",
+        "silex/web-profiler"    : "dev-master",
+        "flint/tacker"          : "~1.1",
+        "twig/twig"             : "~1.14",
+        "doctrine/annotations"  : "~1.0",
+        "symfony/debug-bundle"  : "~2.6",
+        "symfony/http-kernel"   : "~2.7@dev",
 
-        "puli/cli"             : "~1.0"
+        "puli/composer-plugin"  : "~1.0"
     },
 
     "minimum-stability" : "beta",
