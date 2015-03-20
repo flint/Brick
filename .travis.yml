@@ -22,7 +22,6 @@ git:
     submodules: false
 
 before_script:
-    - composer self-update
     - composer require phpspec/phpspec:~2.0 --no-update
     - composer update
 
