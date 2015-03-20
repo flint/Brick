@@ -27,7 +27,7 @@
         "symfony/debug-bundle" : "~2.6",
         "symfony/http-kernel"  : "~2.7@dev",
 
-        "puli/cli"             : "~1.0",
+        "puli/cli"             : "~1.0"
     },
 
     "minimum-stability" : "beta",
