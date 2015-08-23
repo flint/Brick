@@ -35,8 +35,8 @@ class DebugServiceProvider implements ServiceProviderInterface, EventListenerPro
             $pimple->extend('twig.loader.filesystem', function ($loader) {
                 // The only class we could use to find the directory depends on DependencyInjection component
                 // which we dont use. For that reason we try and find the vendor dir instead, and use that.
-                $r = new \ReflectionClass('Silex\Application');
-                $views = dirname($r->getFilename()) . '/../../../../symfony/debug-bundle/Symfony/Bundle/DebugBundle/Resources/views';
+                $r = new \ReflectionClass('Symfony\Bundle\DebugBundle\DependencyInjection\Configuration');
+                $views = dirname($r->getFilename()) . '/../Resources/views';
 
                 $loader->addPath($views, 'Debug');
 
@@ -45,7 +45,11 @@ class DebugServiceProvider implements ServiceProviderInterface, EventListenerPro
         }
 
         if (isset($pimple['data_collectors'])) {
-            $pimple['data_collector.templates'] = array_merge($pimple['data_collector.templates'], [['dump', '@Debug/Profiler/dump.html.twig']]);
+            $pimple->extend('data_collector.templates', function ($templates) {
+                $templates[] = ['dump', '@Debug/Profiler/dump.html.twig'];
+
+                return $templates;
+            });
 
             $pimple->extend('data_collectors', function ($collectors) {
                 $collectors['dump'] = function ($app) {
