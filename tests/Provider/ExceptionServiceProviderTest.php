@@ -2,36 +2,31 @@
 
 namespace Brick\Tests\Provider;
 
+use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Brick\Provider\ExceptionServiceProvider;
-use Pimple\Container;
 
 class ExceptionServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->pimple = new Container([
-            'exception_handler' => function () {
-                return 'exception_handler';
-            },
-            'logger' => function () {},
-        ]);
+        $this->app = new Application();
 
-        $this->pimple->register(new TwigServiceProvider);
-        $this->pimple->register(new ExceptionServiceProvider);
+        $this->app->register(new TwigServiceProvider);
+        $this->app->register(new ExceptionServiceProvider);
     }
 
     public function testOverrideExceptionHandler()
     {
-        $this->assertInstanceOf('Symfony\Component\HttpKernel\EventListener\ExceptionListener', $this->pimple['exception_handler']);
+        $this->assertInstanceOf('Symfony\Component\HttpKernel\EventListener\ExceptionListener', $this->app['exception_handler']);
     }
 
     public function testExceptionController()
     {
         $provider = new TwigServiceProvider;
-        $provider->register($this->pimple);
+        $provider->register($this->app);
 
-        $this->assertInstanceOf('Brick\Controller\ExceptionController', $this->pimple['exception_controller']);
+        $this->assertInstanceOf('Brick\Controller\ExceptionController', $this->app['exception_controller']);
     }
 
 }
