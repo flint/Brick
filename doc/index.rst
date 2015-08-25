@@ -209,6 +209,22 @@ This is the same lookup that is `done in Symfony <http://symfony.com/doc/current
         // $app is an application
         $app->get('_error/{$statusCode}', new ErrorPageController($app['exception_controller']));
 
+Puli
+~~~~
+
+Brick comes with experimental support for Puli, which helps manage resources in composer packages.
+
+    .. code-block:: php
+
+        <?php
+
+        use Brick\Provider\PuliServiceProvider;
+
+        (new PuliServiceProvider)->register($app);
+
+If a ``twig`` service exists it will register ``PuliTemplateLoader`` and its extension if ``puli/url-generator``
+package is present.
+
 All in One
 ~~~~~~~~~~
 
