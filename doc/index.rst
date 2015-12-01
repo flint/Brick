@@ -229,7 +229,7 @@ All in One
 ~~~~~~~~~~
 
 All of the above is pretty cool. And using it all together without registering a lot of service providers would
-be even cooler. For that exact reason is why Brick ships with a ``Aplication`` with all of the above service
+be even cooler. For that exact reason is why Brick ships with a ``Application`` with all of the above service
 providers pre-registered.
 
 .. code-block:: php
