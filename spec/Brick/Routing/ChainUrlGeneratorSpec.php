@@ -4,6 +4,7 @@ namespace spec\Brick\Routing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ChainUrlGeneratorSpec extends ObjectBehavior
 {
@@ -25,7 +26,7 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
     {
         $this->beConstructedWith([$first]);
 
-        $first->generate('route_name', [], false)
+        $first->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->shouldBeCalled()->willThrow('Symfony\Component\Routing\Exception\RouteNotFoundException');
 
         $this->shouldThrow('Symfony\Component\Routing\Exception\RouteNotFoundException')
@@ -34,10 +35,10 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
 
     function it_generates_in_a_chain($first, $second)
     {
-        $first->generate('route_name', [], false)
+        $first->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->shouldBeCalled()->willThrow('Symfony\Component\Routing\Exception\RouteNotFoundException');
 
-        $second->generate('route_name', [], false)
+        $second->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->shouldBeCalled()->willReturn('this-is-my-url');
 
         $this->generate('route_name')->shouldReturn('this-is-my-url');
@@ -45,10 +46,10 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
 
     function it_prioritize_invalid_over_missing($first, $second)
     {
-        $first->generate('route_name', [], false)
+        $first->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->willThrow('Symfony\Component\Routing\Exception\MissingMandatoryParametersException');
 
-        $second->generate('route_name', [], false)
+        $second->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->willThrow('Symfony\Component\Routing\Exception\InvalidParameterException');
 
         $this->shouldThrow('Symfony\Component\Routing\Exception\InvalidParameterException')
@@ -57,10 +58,10 @@ class ChainUrlGeneratorSpec extends ObjectBehavior
 
     function it_prioritize_missing_over_not_found($first, $second)
     {
-        $first->generate('route_name', [], false)
+        $first->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->willThrow('Symfony\Component\Routing\Exception\RouteNotFoundException');
 
-        $second->generate('route_name', [], false)
+        $second->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->shouldBeCalled()->willThrow('Symfony\Component\Routing\Exception\MissingMandatoryParametersException');
 
         $this->shouldThrow('Symfony\Component\Routing\Exception\MissingMandatoryParametersException')
