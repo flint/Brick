@@ -14,14 +14,14 @@
     "require" : {
         "php"            : "~5.5|~7.0",
         "silex/api"      : "~2.0@dev",
-        "pimple/pimple"  : "~3.0",
-        "symfony/config" : "~2.5"
+        "pimple/pimple"  : "^3.0",
+        "symfony/config" : "^3.0"
     },
 
     "require-dev" : {
         "silex/silex"          : "2.0.x-dev",
         "silex/web-profiler"   : "dev-master",
-        "flint/tacker"         : "~1.1",
+        "flint/tacker"         : "^1.0",
         "twig/twig"            : "~1.14",
         "doctrine/annotations" : "~1.0",
         "symfony/debug-bundle" : "~2.6",
