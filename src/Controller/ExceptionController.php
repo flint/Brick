@@ -29,7 +29,9 @@ class ExceptionController
         } catch (\Twig_Error_Loader $e) {
             $request->setRequestFormat('html');
 
-            return (new ExceptionHandler(false))->createResponse($exception);
+            $content = (new ExceptionHandler(false))->getHtml($exception);
+
+            return new Response($content, $exception->getStatusCode(), $exception->getHeaders());
         }
 
         // We cannot find a template that matches the precise format so we will default
